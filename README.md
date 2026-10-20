@@ -2,6 +2,8 @@
 
 A lightweight, local-first cleaner by **Darren Smith / EASY AGENT**. Free, open source, MIT licensed. Python runtime code has no third-party dependencies.
 
+![The local dashboard before the first cleanup](docs/assets/dashboard.png)
+
 ## What it does
 
 - A private loopback dashboard, a CLI, bounded scans and a JSON report after cleanup.
@@ -54,6 +56,6 @@ python build.py
 python dist/easy-pc-cleaner.pyz --version
 ```
 
-The tests use synthetic files and mocked external operations. Cross-platform CI runs them on Windows, macOS and Linux; a green test does not establish every desktop's notification/scheduler configuration. The initial Windows binary is unsigned; do not bypass a security block. Inspect source or use the portable release if your organization requires signed executables.
+The tests use synthetic files and mocked external operations. The repository includes Windows/macOS/Linux CI, but its initial run was blocked before execution by the GitHub account billing lock. Local Windows tests passed; macOS/Linux runtime checks remain unverified. A green test would not establish every desktop's notification/scheduler configuration. The initial Windows binary is unsigned; do not bypass a security block. Inspect source or use the portable release if your organization requires signed executables.
 
 Package cache behavior follows [npm cache](https://docs.npmjs.com/cli/commands/npm-cache/), [pip cache](https://pip.pypa.io/en/stable/cli/pip_cache/) and [uv cache](https://docs.astral.sh/uv/concepts/cache/). The portable format follows [Python zipapp](https://docs.python.org/3/library/zipapp.html).

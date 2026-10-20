@@ -146,7 +146,8 @@
     const hasPlan = Boolean(plan && typeof plan === "object");
     $("scan-empty").hidden = hasPlan;
     $("scan-results").hidden = !hasPlan;
-    $("clean-button").disabled = !hasPlan;
+    const eligibleCount = plan?.summary?.candidateCount ?? plan?.summary?.candidateFiles ?? plan?.candidates?.length ?? 0;
+    $("clean-button").disabled = !hasPlan || Number(eligibleCount) === 0;
     if (!hasPlan) return;
     const summary = plan.summary && typeof plan.summary === "object" ? plan.summary : {};
     const candidates = Array.isArray(plan.candidates) ? plan.candidates : [];
@@ -210,7 +211,8 @@
       const response = await api("/api/scan", { method: "POST", body: {} });
       renderPlan(response.plan);
       const count = response?.plan?.summary?.candidateCount ?? response?.plan?.summary?.candidateFiles ?? response?.plan?.candidates?.length ?? 0;
-      message(`Scan complete. ${count} eligible temporary file(s) are ready for review.`);
+      const partial = Boolean(response?.plan?.summary?.truncated);
+      message(`${partial ? "Bounded scan paused at its safety limit" : "Scan complete"}. ${count} eligible temporary file(s) found; ${count ? "review the plan before cleaning" : "nothing is selected for cleanup"}.`);
     } catch (error) {
       renderPlan(null);
       message(error.message, "error");

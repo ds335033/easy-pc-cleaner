@@ -8,6 +8,7 @@ directory.
 from __future__ import annotations
 
 import hashlib
+import importlib.metadata
 import shutil
 import subprocess
 import sys
@@ -166,6 +167,11 @@ def main() -> None:
     for document in (ROOT / "README.md", ROOT / "LICENSE", ROOT / "SECURITY.md"):
         _copy_release_document(document, bundle)
     _python_runtime_license(bundle)
+    distribution = importlib.metadata.distribution("pyinstaller")
+    license_entry = next((entry for entry in distribution.files or [] if str(entry).endswith("licenses/COPYING.txt")), None)
+    if license_entry is None:
+        raise RuntimeError("The required PyInstaller license and bootloader exception were not found.")
+    _copy_release_document(Path(distribution.locate_file(license_entry)), bundle, "LICENSE.pyinstaller.txt")
 
     # The portable build owns the canonical manifest format. Generate it only
     # after every executable, data file and required release document exists.

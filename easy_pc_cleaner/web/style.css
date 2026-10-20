@@ -1,3 +1,5 @@
+[hidden] { display: none !important; }
+
 :root {
   color-scheme: dark;
   --ink: #edf6fb;
