@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.build-env/
+build/
+dist/
+*.spec
+.local/
+reports/
+output/
+*.log
+.env*

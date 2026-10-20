@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="easy-pc-cleaner is a free, open-source, local-first cleanup tool for Windows, macOS and Linux.">
+    <title>easy-pc-cleaner — clean with receipts</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav">
+      <a class="logo" href="#top" aria-label="easy-pc-cleaner home">
+        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M9 12.5h30v22H9zM15 35.5h18M20 29l2.8 3 6.2-8.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b>easy</b><em>-pc-cleaner</em></span>
+      </a>
+      <nav aria-label="Main navigation"><a href="#safety">Safety</a><a href="#how-it-works">How it works</a><a href="https://github.com/ds335033/easy-pc-cleaner">Source</a></nav>
+      <a class="nav-cta" href="https://github.com/ds335033/easy-pc-cleaner/releases/latest">Latest release</a>
+    </header>
+
+    <main id="main">
+      <section id="top" class="hero">
+        <div class="hero-copy">
+          <p class="kicker">Free and open source · MIT License</p>
+          <h1>Clean the clutter.<br><span>Keep the control.</span></h1>
+          <p class="lede">easy-pc-cleaner is a local-first maintenance tool for Windows, macOS and Linux. It reviews stale temporary files, uses official package-cache tools, and gives you a report after every run.</p>
+          <div class="downloads" aria-label="Downloads">
+            <a class="button primary" href="https://github.com/ds335033/easy-pc-cleaner/releases/latest/download/easy-pc-cleaner.pyz">Download portable app <small>Python 3.10+</small></a>
+            <a class="button secondary" href="https://github.com/ds335033/easy-pc-cleaner/releases/latest/download/easy-pc-cleaner-windows-x64.zip">Windows portable ZIP <small>when included in the release</small></a>
+          </div>
+          <p class="release-note">Release download names may change while the first public build is packaged. Check the <a href="https://github.com/ds335033/easy-pc-cleaner/releases/latest">release page</a> for the verified files and checksums.</p>
+        </div>
+        <div class="preview" aria-label="Illustrated interface preview">
+          <div class="preview-bar"><span class="dot coral"></span><span class="dot gold"></span><span class="dot mint"></span><span class="preview-title">easy-pc-cleaner · local control room</span></div>
+          <div class="preview-body">
+            <div class="preview-top"><span class="mini-logo">⌁</span><span>Safe cleanup plan</span><span class="local">LOCAL</span></div>
+            <div class="preview-rule"></div>
+            <div class="preview-stats"><div><small>Protection policy</small><b>7 days</b><span>stale temp only</span></div><div><small>Autopilot</small><b>90 min</b><span>report after run</span></div></div>
+            <div class="preview-list"><div><i></i><span>Review candidates before cleanup</span><b>Read first</b></div><div><i></i><span>Use official npm / pip / uv commands</span><b>Manual</b></div><div><i></i><span>Inventory documents and media</span><b>Read-only</b></div></div>
+            <div class="preview-button">Scan safe areas</div>
+          </div>
+          <p>Illustrated interface preview — actual results depend on your computer.</p>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="Product principles">
+        <div><strong>Local-first</strong><span>No account, cloud AI or API key.</span></div>
+        <div><strong>Bounded</strong><span>Stale files only, with size and time limits.</span></div>
+        <div><strong>Auditable</strong><span>A local report records each completed task.</span></div>
+      </section>
+
+      <section id="safety" class="section safety">
+        <div class="section-intro"><p class="kicker">Designed to be cautious</p><h2>Cleaning software should explain itself.</h2><p>Automatic cleanup is deliberately narrow. The application does not turn “more space” into permission to sweep through personal work.</p></div>
+        <div class="safety-grid">
+          <article><span class="icon">01</span><h3>Safe default</h3><p>Only the current user’s stale temporary files can be placed in the automatic cleanup plan. Links, protected folders, recent files and locked files are skipped.</p></article>
+          <article><span class="icon">02</span><h3>Clear approvals</h3><p>Manual cleanup and package-cache tasks require a confirmation phrase in the local dashboard. The system Trash / Recycle Bin opens for you to review.</p></article>
+          <article><span class="icon">03</span><h3>Read-only discovery</h3><p>Large documents, images, videos, duplicate candidates, repositories and possible dead code are inventories for your decision. They are never automatic deletion targets.</p></article>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="section flow">
+        <div class="section-intro"><p class="kicker">One honest workflow</p><h2>Scan, decide, keep a receipt.</h2></div>
+        <ol>
+          <li><span>1</span><div><h3>Scan safe areas</h3><p>The app builds a limited plan from eligible stale temporary files. Scanning changes nothing.</p></div></li>
+          <li><span>2</span><div><h3>Review and confirm</h3><p>You see the candidate count, size and paths before the local cleanup action can run.</p></div></li>
+          <li><span>3</span><div><h3>Read the report</h3><p>Each completed cleanup, cache task or requested inventory receives a local report.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="section developer">
+        <div class="developer-copy"><p class="kicker">For developers, without shortcuts</p><h2>Package caches are managed by their own tools.</h2><p>easy-pc-cleaner can ask npm, npx, pip and uv to run their supported cache operations. Verification is the starting point. Purges are always manual, and the 90-minute scheduler never performs a full package-cache purge.</p><a class="text-link" href="https://github.com/ds335033/easy-pc-cleaner">Read the source and safety notes <span aria-hidden="true">→</span></a></div>
+        <div class="terminal" aria-label="Illustrated terminal example"><div><span></span><span></span><span></span></div><p><b>easy-pc-cleaner</b> · local report</p><code>npm verify requested</code><code>temporary files reviewed</code><code class="teal">nothing outside the approved scope changed</code></div>
+      </section>
+
+      <section class="section install">
+        <div><p class="kicker">Get started</p><h2>Use the release that fits your machine.</h2><p>The portable application requires Python 3.10 or newer. A Windows portable ZIP may be included in a release; it is not a promise that every release contains a bundled build.</p></div>
+        <div class="install-actions"><a class="button primary" href="https://github.com/ds335033/easy-pc-cleaner/releases/latest/download/easy-pc-cleaner.pyz">Portable app (.pyz)</a><a class="button secondary" href="https://github.com/ds335033/easy-pc-cleaner/releases/latest">Open releases</a></div>
+      </section>
+    </main>
+
+    <footer><div><a class="logo" href="#top"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M9 12.5h30v22H9zM15 35.5h18M20 29l2.8 3 6.2-8.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>easy</b><em>-pc-cleaner</em></span></a><p>Built by EASY AGENT · Founder Darren Smith</p></div><div class="footer-links"><a href="https://github.com/ds335033/easy-pc-cleaner">GitHub</a><a href="https://github.com/ds335033/easy-pc-cleaner/blob/main/LICENSE">MIT License</a><a href="#safety">Safety design</a></div></footer>
+  </body>
+</html>

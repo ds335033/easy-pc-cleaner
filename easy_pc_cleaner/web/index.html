@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="api-token" content="__EPC_TOKEN__">
+    <meta name="description" content="Easy PC Cleaner is a local-first, reviewable computer cleanup dashboard.">
+    <title>easy-pc-cleaner · Local control room</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to dashboard</a>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="easy-pc-cleaner home">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+          <path d="M9 12.5h30v22H9z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M15 35.5h18M20 29l2.8 3 6.2-8.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span><strong>easy</strong><span class="brand-accent">-pc-cleaner</span><small>by EASY AGENT</small></span>
+      </a>
+      <div class="connection" aria-label="Local application status"><span class="pulse" aria-hidden="true"></span><span id="connection-status">Connecting locally…</span></div>
+    </header>
+
+    <main id="main" class="layout">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Local-first maintenance</p>
+          <h1 id="page-title">A calmer computer, with every action in view.</h1>
+          <p class="lede">Easy PC Cleaner finds stale temporary files and keeps package-cache tasks deliberate. Your documents, photos, videos, code and repositories are inventory-only unless you choose a separate review.</p>
+        </div>
+        <div class="hero-actions">
+          <button id="scan-button" class="button button-primary" type="button">Scan safe areas</button>
+          <button id="trash-button" class="button button-secondary" type="button">Open Trash / Recycle Bin</button>
+        </div>
+      </section>
+
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+      <section class="status-grid" aria-label="Current cleaner status">
+        <article class="card status-card">
+          <div class="card-heading"><span class="section-kicker">Protection policy</span><span class="shield" aria-hidden="true">✓</span></div>
+          <p class="metric" id="policy-age">7 days</p>
+          <p class="subtle">Only stale user temporary files can be eligible for a cleanup plan.</p>
+          <dl class="compact-definition">
+            <div><dt>Per-run ceiling</dt><dd id="policy-limit">512 MiB</dd></div>
+            <div><dt>Review queue</dt><dd id="review-count">—</dd></div>
+          </dl>
+        </article>
+        <article class="card status-card">
+          <div class="card-heading"><span class="section-kicker">Autopilot</span><span id="autopilot-chip" class="chip chip-muted">Checking…</span></div>
+          <p class="metric" id="autopilot-interval">Every 90 minutes</p>
+            <p class="subtle" id="autopilot-description">When enabled, it runs the same limited stale-temp policy and saves a local report.</p>
+          <button id="autopilot-button" class="text-button" type="button">Manage autopilot</button>
+        </article>
+        <article class="card status-card">
+          <div class="card-heading"><span class="section-kicker">Last local report</span><span class="report-dot" aria-hidden="true"></span></div>
+          <p class="metric metric-small" id="last-report">No report yet</p>
+          <p class="subtle" id="last-report-detail">Run a scan to create a reviewable cleanup plan.</p>
+          <button id="refresh-button" class="text-button" type="button">Refresh status</button>
+        </article>
+      </section>
+
+      <section class="workspace-grid" aria-label="Cleaner actions">
+        <article class="card scan-card" aria-labelledby="scan-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Step 1</p>
+              <h2 id="scan-title">Review the safe cleanup plan</h2>
+            </div>
+            <span class="outline-label">No files change during a scan</span>
+          </div>
+          <p class="body-copy">The scan is limited to the current user’s temporary area. It skips links, protected folders, recent files, locked files and items above the policy cap.</p>
+          <div id="scan-empty" class="empty-state">
+            <span class="empty-icon" aria-hidden="true">⌁</span>
+            <p>There is no active cleanup plan. Start a scan to see actual candidates.</p>
+          </div>
+          <div id="scan-results" hidden>
+            <div class="result-summary" aria-live="polite">
+              <div><span class="result-label">Eligible files</span><strong id="candidate-count">0</strong></div>
+              <div><span class="result-label">Eligible space</span><strong id="candidate-bytes">0 B</strong></div>
+              <div><span class="result-label">Scan boundaries</span><strong id="scan-boundaries">Stale temp</strong></div>
+            </div>
+            <p id="scan-note" class="subtle"></p>
+            <div class="candidate-table-wrap" tabindex="0">
+              <table>
+                <caption class="sr-only">Top cleanup candidates from the current scan</caption>
+                <thead><tr><th scope="col">Candidate</th><th scope="col">Category</th><th scope="col">Size</th><th scope="col">Eligible</th></tr></thead>
+                <tbody id="candidate-list"></tbody>
+              </table>
+            </div>
+            <p id="candidate-more" class="subtle"></p>
+          </div>
+          <div class="action-row">
+            <button id="rescan-button" class="button button-secondary" type="button">Rescan</button>
+            <button id="clean-button" class="button button-danger" type="button" disabled>Clean reviewed stale temp</button>
+          </div>
+          <p class="fine-print">Cleaning requires the phrase <code>CLEAN STALE TEMP</code>. It never empties the Trash / Recycle Bin for you.</p>
+        </article>
+
+        <aside class="card cache-card" aria-labelledby="cache-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Developer hygiene</p>
+              <h2 id="cache-title">Package caches</h2>
+            </div>
+          </div>
+          <p class="body-copy">Use each ecosystem’s official command. Verification is a safer first step; purge actions are always manual.</p>
+          <div class="cache-actions" role="group" aria-label="Package cache operations">
+            <button data-cache-tool="npm-verify" class="cache-action" type="button"><span>npm</span><small>Verify cache</small></button>
+            <button data-cache-tool="npm-purge" class="cache-action" type="button"><span>npm</span><small>Clear cache</small></button>
+            <button data-cache-tool="npx-purge" class="cache-action" type="button"><span>npx</span><small>Clear npx cache</small></button>
+            <button data-cache-tool="pip-purge" class="cache-action" type="button"><span>pip</span><small>Purge cache</small></button>
+            <button data-cache-tool="uv-prune" class="cache-action" type="button"><span>uv</span><small>Prune cache</small></button>
+          </div>
+          <p class="fine-print">A cache task requires <code>RUN CACHE TASK</code> and creates a local report.</p>
+        </aside>
+      </section>
+
+      <section class="card inventory-card" aria-labelledby="inventory-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Requested review only</p>
+            <h2 id="inventory-title">Inventory large files, media and project folders</h2>
+          </div>
+          <span class="outline-label">Read-only</span>
+        </div>
+        <p class="body-copy">Choose one folder to review. Documents, images, videos, duplicate candidates and repositories are listed for your decision; this feature never deletes or rewrites them. Dead-code analysis is also review-only.</p>
+        <form id="inventory-form" class="inventory-form">
+          <label for="inventory-path">Folder to inventory</label>
+          <div class="input-action">
+            <input id="inventory-path" name="path" type="text" autocomplete="off" spellcheck="false" placeholder="Paste a local folder path">
+            <button id="inventory-button" class="button button-secondary" type="submit">Create inventory</button>
+          </div>
+          <label class="checkbox-label"><input id="duplicates-check" type="checkbox"> Also compare potential duplicate files by content</label>
+        </form>
+        <div id="inventory-result" class="inventory-result" role="status" aria-live="polite" hidden></div>
+      </section>
+
+      <section class="report-section" aria-labelledby="reports-title">
+        <div class="section-heading inline-heading"><div><p class="eyebrow">Audit trail</p><h2 id="reports-title">Recent local reports</h2></div><button id="reports-refresh" class="text-button" type="button">Refresh reports</button></div>
+        <div id="report-list" class="report-list"><p class="subtle">Loading local reports…</p></div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>Built by <strong>EASY AGENT</strong> · Founder Darren Smith</span><span>Local application · No account, cloud AI or API key required</span></footer>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
